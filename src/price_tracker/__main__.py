@@ -13,3 +13,5 @@ def openaicaller():
     )
 
     print(response.output_text)
+
+openaicaller()
