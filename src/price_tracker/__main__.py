@@ -1,4 +1,7 @@
+import os
 from openai import OpenAI
+
+model = os.getenv("OPENAI_MODEL","gpt-4o-mini")
 
 def openaicaller():
     client = OpenAI()
@@ -13,6 +16,7 @@ def openaicaller():
     )
 
     return response.output_text
+
 
 if __name__ == "__main__":
     print(openaicaller())
