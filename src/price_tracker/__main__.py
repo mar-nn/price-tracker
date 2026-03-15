@@ -14,4 +14,5 @@ def openaicaller():
 
     return response.output_text
 
-print(openaicaller())
+if __name__ == "__main__":
+    print(openaicaller())
