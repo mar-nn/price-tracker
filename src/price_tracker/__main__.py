@@ -12,6 +12,6 @@ def openaicaller():
         ],
     )
 
-    print(response.output_text)
+    return response.output_text
 
-openaicaller()
+print(openaicaller())
