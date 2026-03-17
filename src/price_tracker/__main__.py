@@ -7,7 +7,7 @@ def openaicaller():
     client = OpenAI()
 
     response = client.responses.create(
-        model="gpt-4o-mini",
+        model=MODEL_NAME,
         input=[
             {"role": "user", "content": "knock knock."},
             {"role": "assistant", "content": "Who's there?"},
