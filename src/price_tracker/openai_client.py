@@ -5,7 +5,7 @@ MODEL_NAME = os.getenv("OPENAI_MODEL","gpt-4o-mini")
 
 def openai_caller():
     client = OpenAI()
-
+        
     response = client.responses.create(
         model=MODEL_NAME,
         input=[
