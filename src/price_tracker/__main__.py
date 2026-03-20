@@ -1,22 +1,13 @@
 import os
 from openai import OpenAI
+from openai_client import openaicaller
 
 MODEL_NAME = os.getenv("OPENAI_MODEL","gpt-4o-mini")
 
-def openaicaller():
-    client = OpenAI()
-
-    response = client.responses.create(
-        model=MODEL_NAME,
-        input=[
-            {"role": "user", "content": "knock knock."},
-            {"role": "assistant", "content": "Who's there?"},
-            {"role": "user", "content": "Orange."},
-        ],
-    )
-
-    return response.output_text
+def main():
+    result = openaicaller()
+    print(result)
 
 
 if __name__ == "__main__":
-    print(openaicaller())
+    main()
