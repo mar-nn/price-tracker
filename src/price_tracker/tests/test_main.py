@@ -1,10 +1,9 @@
 from unittest.mock import patch, MagicMock
-from price_tracker.__main__ import openaicaller
+from price_tracker.openai_client import openaicaller
 
 
-@patch("price_tracker.__main__.OpenAI")
+@patch("price_tracker.openai_client.OpenAI")
 def test_openaicaller(mock_openai):
-
     mock_client = MagicMock()
     mock_openai.return_value = mock_client
 
