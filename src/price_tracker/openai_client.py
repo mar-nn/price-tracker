@@ -3,9 +3,8 @@ from openai import OpenAI
 
 MODEL_NAME = os.getenv("OPENAI_MODEL","gpt-4o-mini")
 
-client = OpenAI()
-
-def openaicaller():
+def openai_caller():
+    client = OpenAI()
 
     response = client.responses.create(
         model=MODEL_NAME,

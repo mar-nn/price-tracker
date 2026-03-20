@@ -1,11 +1,11 @@
 import os
 from openai import OpenAI
-from openai_client import openaicaller
+from openai_client import openai_caller
 
 MODEL_NAME = os.getenv("OPENAI_MODEL","gpt-4o-mini")
 
 def main():
-    result = openaicaller()
+    result = openai_caller()
     print(result)
 
 
