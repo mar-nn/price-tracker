@@ -1,3 +1,5 @@
+import argparse
+import requests
 import os
 from openai import OpenAI
 from openai_client import openai_caller, price_extractor
