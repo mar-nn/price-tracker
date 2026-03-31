@@ -16,3 +16,17 @@ def openai_caller():
     )
 
     return response.output_text
+
+def price_extractor():
+    client = OpenAI()
+    html = ""
+        
+    response = client.responses.create(
+        model=MODEL_NAME,
+        input=[
+            {"role": "system", "content": "give me the price of the product from html"},
+            {"role": "user", "content": html,},
+        ],
+    )
+
+    return response.output_text
