@@ -9,6 +9,12 @@ dependencies = [
     "requests>=2.33.1",
 ]
 
+[project.scripts]
+price-tracker = "price_tracker.__main__:main"
+
+[tool.uv]
+package = true
+
 [dependency-groups]
 dev = [
     "pytest>=9.0.2",
