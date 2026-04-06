@@ -15,10 +15,22 @@ parser.add_argument("--model", default = MODEL_NAME, help = "OpenAI model to use
 
 
 def main():
-    #result = openai_caller()
-    result = price_extractor()
-    print(result)
+    args = parser.parse_args()
 
+    url = args.url
+    model = args.model
+
+    response = requests.get(url)
+
+    if response.status_code != 200:
+        print("Failed to fetch URL")
+        return
+    
+    html = response.text
+
+    result = price_extractor(html, model)
+
+    print(result)
 
 if __name__ == "__main__":
     main()
