@@ -17,7 +17,7 @@ def openai_caller():
 
     return response.output_text
 
-def price_extractor(html: str, MODEL_NAME: str):
+def price_extractor(html: str, model_name: str):
     client = OpenAI()
         
     response = client.responses.create(
