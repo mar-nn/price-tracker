@@ -33,4 +33,5 @@ def main():
     print(result)
 
 if __name__ == "__main__":
-    main()
+    args = parser.parse_args()
+    main(url=args.url, model=args.model)
