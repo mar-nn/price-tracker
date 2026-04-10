@@ -3,7 +3,7 @@ import requests
 import os
 
 from openai import OpenAI
-from price_tracker.openai_client import (openai_caller, price_extractor)
+from price_tracker.openai_client import price_extractor
 
 MODEL_NAME = os.getenv("OPENAI_MODEL","gpt-4o-mini")
 
