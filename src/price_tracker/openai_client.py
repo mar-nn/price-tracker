@@ -21,7 +21,7 @@ def price_extractor(html: str, model_name: str):
     client = OpenAI()
         
     response = client.responses.create(
-        model=MODEL_NAME,
+        model=model_name,
         input=[
             {"role": "system", "content": "give me the price of the product from html"},
             {"role": "user", "content": html,},
