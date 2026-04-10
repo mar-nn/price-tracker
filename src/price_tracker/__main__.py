@@ -14,7 +14,7 @@ parser.add_argument("--url", required = True, help = "URL of the product page")
 parser.add_argument("--model", default = MODEL_NAME, help = "OpenAI model to use")
 
 
-def main():
+def main(url: str, model: str):
 
     url = args.url
     model = args.model
