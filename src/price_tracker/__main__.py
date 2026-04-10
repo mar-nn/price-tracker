@@ -15,7 +15,6 @@ parser.add_argument("--model", default = MODEL_NAME, help = "OpenAI model to use
 
 
 def main():
-    args = parser.parse_args()
 
     url = args.url
     model = args.model
