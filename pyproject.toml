@@ -10,7 +10,7 @@ dependencies = [
 ]
 
 [project.scripts]
-price-tracker = "price_tracker.__main__:main"
+price-tracker = "price_tracker.__main__:cli"
 
 [tool.uv]
 package = true
