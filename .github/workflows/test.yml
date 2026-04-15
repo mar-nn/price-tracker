@@ -2,6 +2,7 @@ name: Automate Unit Tests
 
 on:
     push:
+    pull_request:
 
 jobs:
     test:
@@ -9,9 +10,12 @@ jobs:
         steps:
             - name: Checkout Repository
               uses: actions/checkout@v4
+
             - name: Install UV
               uses: astral-sh/setup-uv@v5
+
             - name: Install Dependencies
               run: uv sync
+              
             - name: Run Unit Tests
               run: uv run pytest
