@@ -16,3 +16,17 @@ def openai_caller():
     )
 
     return response.output_text
+
+def price_extractor(html: str, model_name: str):
+    client = OpenAI()
+        
+    response = client.responses.create(
+        model=model_name,
+        input=[
+            {"role": "system", "content": "give me the price of the product from html"},
+            {"role": "user", "content": html,},
+        ],
+        max_output_tokens=50,
+    )
+
+    return response.output_text
