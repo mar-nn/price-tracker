@@ -1,5 +1,6 @@
 import os
 from openai import OpenAI
+from langchain_openai import ChatOpenAI
 
 MODEL_NAME = os.getenv("OPENAI_MODEL","gpt-4o-mini")
 
@@ -17,16 +18,14 @@ def openai_caller():
 
     return response.output_text
 
-def price_extractor(html: str, model_name: str):
-    client = OpenAI()
-        
-    response = client.responses.create(
-        model=model_name,
-        input=[
-            {"role": "system", "content": "give me the price of the product from html"},
-            {"role": "user", "content": html,},
-        ],
-        max_output_tokens=50,
-    )
 
-    return response.output_text
+def price_extractor(html: str, model_name: str):
+    llm = ChatOpenAI()
+
+    system_prompt = ("You're a helpful assistant that extracts the price of a product from its given HTML. You should only return the price.")
+
+    messages = [("system", system_prompt), ("human", html)]
+        
+    response = llm.invoke(messages)
+
+    return response.content
