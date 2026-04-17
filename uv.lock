@@ -537,7 +537,6 @@ dependencies = [
     { name = "langchain-openai" },
     { name = "openai" },
     { name = "requests" },
-    { name = "ruff" },
 ]
 
 [package.dev-dependencies]
@@ -553,7 +552,6 @@ requires-dist = [
     { name = "langchain-openai" },
     { name = "openai" },
     { name = "requests", specifier = ">=2.33.1" },
-    { name = "ruff", specifier = ">=0.15.11" },
 ]
 
 [package.metadata.requires-dev]

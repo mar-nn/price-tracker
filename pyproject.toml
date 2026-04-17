@@ -8,7 +8,6 @@ dependencies = [
     "openai",
     "requests>=2.33.1",
     "langchain-openai",
-    "ruff>=0.15.11",
 ]
 
 [project.scripts]
