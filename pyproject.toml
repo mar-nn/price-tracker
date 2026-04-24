@@ -8,6 +8,7 @@ dependencies = [
     "openai",
     "requests>=2.33.1",
     "langchain-openai",
+    "pydantic>=2.12.5",
 ]
 
 [project.scripts]
