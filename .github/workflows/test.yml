@@ -16,6 +16,6 @@ jobs:
 
             - name: Install Dependencies
               run: uv sync
-              
+
             - name: Run Unit Tests
               run: uv run pytest
