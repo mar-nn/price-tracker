@@ -16,6 +16,10 @@ price-tracker = "price_tracker.__main__:cli"
 [tool.uv]
 package = true
 
+[tool.ruff.lint]
+select = ["I", "RUF"]
+fixable = ["ALL"]
+
 [dependency-groups]
 dev = [
     "pre-commit>=4.5.1",
