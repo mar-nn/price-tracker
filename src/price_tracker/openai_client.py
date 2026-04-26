@@ -7,12 +7,11 @@ from openai import OpenAI
 
 MODEL_NAME = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
 
-PROMPT_PATH = Path(__file__).parent / "prompts" / "price_extraction.txt"
+PROMPT_PATH = Path(__file__).parents[2] / "assets" / "prompts" / "price_extraction.txt"
 
 
 def load_system_prompt() -> str:
-    with open(PROMPT_PATH, "r", encoding="utf-8") as f:
-        return f.read()
+    return PROMPT_PATH.read_text(encoding="utf-8")
 
 
 def openai_caller():
