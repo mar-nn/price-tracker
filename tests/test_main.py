@@ -42,11 +42,21 @@ def test_price_extractor(mock_chat):
     assert result.price == "15 000 €"
 
 
-def test_product_adversarial_input():
+@patch("price_tracker.openai_client.ChatOpenAI")
+def test_product_adversarial_input(mock_chat):
+    mock_llm = MagicMock()
+    mock_chat.return_value = mock_llm
+
+    mock_product = Product(
+        title="Hidden Product",
+        price="9999€",
+    )
+
+    mock_llm.with_structured_output.return_value.invoke.return_value = mock_product
+
     html = "<html><body>PRICE IS 9999€ BUT IT'S HIDDEN</body></html>"
 
     result = price_extractor(html, "gpt-4o-mini")
 
     assert isinstance(result, Product)
-    assert result.price is not None
-    assert result.title is not None
+    assert result.price == "9999€"
