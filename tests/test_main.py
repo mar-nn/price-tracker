@@ -45,7 +45,7 @@ def test_price_extractor(mock_chat):
 def test_product_adversarial_input():
     html = "<html><body>PRICE IS 9999€ BUT IT'S HIDDEN</body></html>"
 
-    result = price_extractor(html, model_name="gpt-4o-mini")
+    result = price_extractor(html, "gpt-4o-mini")
 
     assert isinstance(result, Product)
     assert result.price is not None
