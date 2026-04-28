@@ -1,7 +1,10 @@
 import os
 
+from langchain_core.messages import HumanMessage
 from langchain_openai import ChatOpenAI
 from openai import OpenAI
+
+from price_tracker.prompts import SystemPrompt
 
 MODEL_NAME = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
 
@@ -22,15 +25,7 @@ def openai_caller():
 
 
 def price_extractor(html: str, model_name: str):
-    llm = ChatOpenAI()
-
-    system_prompt = (
-        "You're a helpful assistant that extracts the price of a product "
-        "from its given HTML. You should only return the price."
-    )
-
-    messages = [("system", system_prompt), ("human", html)]
-
+    llm = ChatOpenAI(model_name=model_name)
+    messages = [SystemPrompt(), HumanMessage(content=html)]
     response = llm.invoke(messages)
-
     return response.content
