@@ -7,7 +7,7 @@ from openai import OpenAI
 
 MODEL_NAME = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
 
-PROMPT_PATH = Path(__file__).parents[2] / "assets" / "prompts" / "price_extraction.txt"
+PROMPT_PATH = os.getenv("SYSTEM_PROMPT_PATH", Path(__file__).parents[2] / "assets" / "prompts")
 
 
 def load_system_prompt() -> str:
