@@ -1,22 +1,12 @@
 import os
-from pathlib import Path
 
-from langchain_core.messages import HumanMessage, SystemMessage
+from langchain_core.messages import HumanMessage
 from langchain_openai import ChatOpenAI
 from openai import OpenAI
 
+from price_tracker.prompts import SystemPrompt
+
 MODEL_NAME = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
-
-PROMPT_PATH = Path(
-    os.getenv(
-        "SYSTEM_PROMPT_PATH",
-        Path(__file__).parents[2] / "assets" / "prompts" / "price_extraction.txt",
-    )
-)
-
-
-def load_system_prompt() -> str:
-    return PROMPT_PATH.read_text(encoding="utf-8")
 
 
 def openai_caller():
@@ -36,11 +26,6 @@ def openai_caller():
 
 def price_extractor(html: str, model_name: str):
     llm = ChatOpenAI(model_name=model_name)
-
-    system_prompt = load_system_prompt()
-
-    messages = [SystemMessage(content=system_prompt), HumanMessage(content=html)]
-
+    messages = [SystemPrompt(), HumanMessage(content=html)]
     response = llm.invoke(messages)
-
     return response.content
