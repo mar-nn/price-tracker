@@ -7,7 +7,12 @@ from openai import OpenAI
 
 MODEL_NAME = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
 
-PROMPT_PATH = os.getenv("SYSTEM_PROMPT_PATH", Path(__file__).parents[2] / "assets" / "prompts")
+PROMPT_PATH = Path(
+    os.getenv(
+        "SYSTEM_PROMPT_PATH",
+        Path(__file__).parents[2] / "assets" / "prompts" / "price_extraction.txt",
+    )
+)
 
 
 def load_system_prompt() -> str:
@@ -30,7 +35,7 @@ def openai_caller():
 
 
 def price_extractor(html: str, model_name: str):
-    llm = ChatOpenAI()
+    llm = ChatOpenAI(model_name=model_name)
 
     system_prompt = load_system_prompt()
 
