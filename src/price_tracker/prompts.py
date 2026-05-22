@@ -2,7 +2,7 @@ from pathlib import Path
 
 from langchain_core.messages import SystemMessage
 
-PROMPT_PATH = Path(__file__).parents[2] / "assets" / "prompts" / "price_extraction.txt"
+PROMPT_PATH = os.getenv("SYSTEM_PROMPT_PATH", os.path.join("assets", "prompts", "price_extraction.txt")
 
 
 class SystemPrompt(SystemMessage):
