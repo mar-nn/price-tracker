@@ -26,7 +26,4 @@ def test_product_valid_promo():
 
 def test_product_invalid_price():
     with pytest.raises(ValidationError):
-        Product(
-            title="Elephant Videogame",
-            price=59.99,  # type: ignore
-        )
+        Product(title="Elephant Videogame", price="59.99 €")  # type: ignore
