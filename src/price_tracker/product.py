@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 
 
+<<<<<<< 10-create-a-product-schema
 class Price(BaseModel):
     value: float
     currency: str
@@ -10,3 +11,8 @@ class Price(BaseModel):
 class Product(BaseModel):
     title: str
     price: Price
+=======
+class Product(BaseModel):
+    title: str
+    price: str
+>>>>>>> master
