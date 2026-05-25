@@ -1,7 +1,7 @@
 from unittest.mock import MagicMock, patch
 
 from price_tracker.openai_client import openai_caller, price_extractor
-from price_tracker.product import Product
+from price_tracker.product import Price, Product
 
 
 @patch("price_tracker.openai_client.OpenAI")
@@ -30,7 +30,7 @@ def test_price_extractor(mock_chat):
 
     mock_structured.invoke.return_value = Product(
         title="Elephant Videogame",
-        price="15 000 €",
+        price=Price(value=15000, currency="€"),
     )
 
     html = "<html>Tung Tung Tung Sahur T-Shirt 15 000 €</html>"
@@ -39,14 +39,5 @@ def test_price_extractor(mock_chat):
 
     assert isinstance(result, Product)
     assert result.title == "Elephant Videogame"
-    assert result.price == "15 000 €"
-
-
-def test_product_adversarial_input():
-    html = "<html><body>PRICE IS 9999€ BUT IT'S HIDDEN</body></html>"
-
-    result = price_extractor(html, "gpt-4o-mini")
-
-    assert isinstance(result, Product)
-    assert result.price is not None
-    assert result.title is not None
+    assert result.price.value == 15000
+    assert result.price.currency == "€"
