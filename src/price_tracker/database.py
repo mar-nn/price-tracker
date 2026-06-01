@@ -1,42 +1,19 @@
-import sqlite3
-from datetime import datetime, timezone
-from pathlib import Path
+import os
 
-DB_PATH = Path("price_tracker.db")
+from sqlalchemy import Engine
+from sqlmodel import Session, create_engine
 
+from price_tracker.models import Product
 
-def get_connection() -> sqlite3.Connection:
-    return sqlite3.connect(DB_PATH)
-
-
-def init_db(conn: sqlite3.Connection) -> None:
-    conn.execute("""
-        CREATE TABLE IF NOT EXISTS prices (
-            product_iid   INTEGER PRIMARY KEY AUTOINCREMENT,
-            url           TEXT NOT NULL,
-            title         TEXT NOT NULL,
-            price_value   REAL NOT NULL,
-            currency      TEXT NOT NULL,
-            is_promo      INTEGER NOT NULL DEFAULT 0,
-            scraped_at    TEXT NOT NULL
-        )
-    """)
-    conn.commit()
+DB_URL = os.getenv("DATABASE_URL", "sqlite:///price_tracker.db")
 
 
-def insert_price(conn: sqlite3.Connection, url: str, product) -> None:
-    conn.execute(
-        """
-        INSERT INTO prices (url, title, price_value, currency, is_promo, scraped_at)
-        VALUES (?, ?, ?, ?, ?, ?)
-        """,
-        (
-            url,
-            product.title,
-            product.price.value,
-            product.price.currency,
-            int(product.price.is_promo),
-            datetime.now(timezone.utc).isoformat(),
-        ),
-    )
-    conn.commit()
+def get_engine() -> Engine:
+    return create_engine(DB_URL)
+
+
+def insert_price(engine: Engine, url: str, product: Product) -> None:
+    record = product.to_orm(url)
+    with Session(engine) as session:
+        session.add(record)
+        session.commit()

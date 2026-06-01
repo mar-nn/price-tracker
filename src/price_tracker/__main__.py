@@ -1,7 +1,7 @@
 import argparse
 import os
 
-from price_tracker.database import get_connection, init_db, insert_price
+from price_tracker.database import get_engine, insert_price
 from price_tracker.openai_client import price_extractor
 from price_tracker.webscraper import get_rendered_html
 
@@ -13,10 +13,8 @@ def main(url: str, model: str):
     result = price_extractor(html, model)
     print(result)
 
-    conn = get_connection()
-    init_db(conn)
-    insert_price(conn, url, result)
-    conn.close()
+    engine = get_engine()
+    insert_price(engine, url, result)
 
 
 def cli():
