@@ -1,36 +1,27 @@
 import argparse
 import os
 
-import requests
-
+from price_tracker.database import get_engine, insert_price
 from price_tracker.openai_client import price_extractor
+from price_tracker.webscraper import get_rendered_html
 
 MODEL_NAME = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
 
 
 def main(url: str, model: str):
-    response = requests.get(url)
-
-    if response.status_code != 200:
-        print("Failed to fetch URL")
-        return
-
-    html = response.text
-
+    html = get_rendered_html(url)
     result = price_extractor(html, model)
-
     print(result)
+
+    engine = get_engine()
+    insert_price(engine, url, result)
 
 
 def cli():
     parser = argparse.ArgumentParser(description="extract price from URL")
-
     parser.add_argument("--url", required=True, help="URL of the product page")
-
     parser.add_argument("--model", default=MODEL_NAME, help="OpenAI model to use")
-
     args = parser.parse_args()
-
     main(url=args.url, model=args.model)
 
 
