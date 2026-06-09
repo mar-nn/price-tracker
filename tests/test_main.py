@@ -30,7 +30,7 @@ def test_price_extractor(mock_chat):
 
     mock_structured.invoke.return_value = Product(
         title="Elephant Videogame",
-        price=Price(value=15000, currency="€"),
+        price=Price(value=15000, currency="EUR"),
     )
 
     html = "<html>Tung Tung Tung Sahur T-Shirt 15 000 €</html>"
@@ -40,4 +40,4 @@ def test_price_extractor(mock_chat):
     assert isinstance(result, Product)
     assert result.title == "Elephant Videogame"
     assert result.price.value == 15000
-    assert result.price.currency == "€"
+    assert result.price.currency == "EUR"
