@@ -4,7 +4,7 @@ from langchain_core.messages import HumanMessage
 from langchain_openai import ChatOpenAI
 from openai import OpenAI
 
-from price_tracker.product import Product
+from price_tracker.models import Product
 from price_tracker.prompts import SystemPrompt
 
 MODEL_NAME = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
