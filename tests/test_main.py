@@ -1,7 +1,7 @@
 from unittest.mock import MagicMock, patch
 
+from price_tracker.models import Price, Product
 from price_tracker.openai_client import openai_caller, price_extractor
-from price_tracker.product import Price, Product
 
 
 @patch("price_tracker.openai_client.OpenAI")

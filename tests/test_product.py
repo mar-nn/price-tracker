@@ -1,7 +1,7 @@
 import pytest
 from pydantic import ValidationError
 
-from price_tracker.product import Price, Product
+from price_tracker.models import Price, Product
 
 
 def test_product_valid():
